@@ -25,3 +25,6 @@ Server/Backed: Server side of the tasks to provide common location for tasks and
 UI - Web: UI for a web page representation of the app.
 
 Social: Ability to push and share tasks with other users. Also, ability to share metrics and completion data amongst users
+
+###Instructions:
+(To be added)

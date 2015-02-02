@@ -1,5 +1,5 @@
 package com.TaskList.api;
 
-/* To get the task deadlines */
+/* To get the time left till deadline */
 
 public class 

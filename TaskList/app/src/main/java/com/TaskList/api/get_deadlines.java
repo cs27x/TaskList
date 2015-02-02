@@ -1,5 +1,5 @@
 package com.TaskList.api;
 
-/* To get the latest event deadline */
+/* To get the task deadlines */
 
 public class 

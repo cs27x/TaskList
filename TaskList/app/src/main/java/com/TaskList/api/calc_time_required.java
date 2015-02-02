@@ -1,5 +1,5 @@
 package com.TaskList.api;
 
-/* calculate time required based on historic rating of expected time reuired */
+/* calculate time required */
 
-/* Known as Xi */
+/* Initially calculated based on time required ratings, then updated based on % completed */

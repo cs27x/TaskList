@@ -11,7 +11,7 @@ public class Categories {
     private ArrayList<Category> categories;
 
     public Categories() {
-        
+
     }
 
     public Categories(ArrayList<Category> categories) {

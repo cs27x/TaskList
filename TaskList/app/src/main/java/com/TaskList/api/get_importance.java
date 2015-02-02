@@ -1,4 +1,4 @@
 package com.TaskList.api;
 
-/* Get importance */
+/* Get importance for tasks/events*/
 

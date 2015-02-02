@@ -1,8 +1,6 @@
 package com.TaskList.api;
 
-/**
- * Created by willpascucci on 1/29/15.
- */
+/* Insert the event timeslots for today */
 public class InsertEvents {
   
 }

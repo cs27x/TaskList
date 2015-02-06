@@ -43,7 +43,7 @@ public class TaskListFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new TaskListAdapter(getActivity());
+        mAdapter = new TaskListAdapter();
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.taskList = Task.getAll();
         mAdapter.notifyDataSetChanged();
@@ -74,7 +74,7 @@ public class TaskListFragment extends Fragment {
 
     @Subscribe
     public void addTask(TaskListActivity.AddTaskEvent event) {
-        Task task = new Task("New Task " + mAdapter.getItemCount());
+        Task task = new Task(null);
         task.save();
         mAdapter.taskList.add(task);
         mAdapter.notifyItemInserted(mAdapter.getItemCount());

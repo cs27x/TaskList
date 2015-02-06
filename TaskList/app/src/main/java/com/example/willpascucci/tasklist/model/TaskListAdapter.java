@@ -8,6 +8,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.willpascucci.tasklist.R;
@@ -22,20 +24,20 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
 
     public List<Task> taskList;
     private ViewHolder mHolder;
-    private Context mContext;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView text;
+        public ImageButton removeButton;
         public ViewHolder(View v) {
             super(v);
             text = (TextView) v.findViewById(R.id.textView);
+            removeButton = (ImageButton) v.findViewById(R.id.button_close);
         }
 
     }
 
-    public TaskListAdapter(Context context) {
+    public TaskListAdapter() {
         taskList = new ArrayList<>();
-        mContext = context;
     }
 
     @Override
@@ -48,6 +50,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int i) {
         final Task task = taskList.get(i);
+        holder.text.setHint("New Task " + i);
         holder.text.setText(task.text);
         holder.text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -63,6 +66,16 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        holder.removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int index = taskList.indexOf(task);
+                taskList.remove(index);
+                notifyItemRemoved(index);
+                task.delete();
             }
         });
     }

@@ -1,22 +1,19 @@
 package com.example.willpascucci.tasklist.ui;
 
 import android.app.Fragment;
+import android.content.PeriodicSync;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.example.willpascucci.tasklist.R;
 import com.example.willpascucci.tasklist.model.Task;
 import com.squareup.otto.Subscribe;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Nathan Walker on 2/4/15.
@@ -47,9 +44,10 @@ public class MainFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        List<Task> l = new ArrayList<>();
-        mAdapter = new MainListAdapter(l);
+        mAdapter = new MainListAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.taskList = Task.getAll();
+        mAdapter.notifyDataSetChanged();
         return rootView;
     }
 
@@ -57,6 +55,7 @@ public class MainFragment extends Fragment {
     public void onStart() {
         super.onStart();
         BusSingleton.get().register(this);
+
     }
 
     @Override
@@ -65,9 +64,20 @@ public class MainFragment extends Fragment {
         super.onStop();
     }
 
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
     @Subscribe
     public void addTask(MainActivity.AddTaskEvent event) {
-        mAdapter.taskList.add(new Task("New Task " + mAdapter.getItemCount()));
+        Task task = new Task("New Task " + mAdapter.getItemCount());
+        task.save();
+        mAdapter.taskList.add(task);
         mAdapter.notifyItemInserted(mAdapter.getItemCount());
     }
 

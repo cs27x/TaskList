@@ -1,7 +1,7 @@
 package com.example.willpascucci.tasklist.ui;
 
 
-import android.content.ClipData;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.willpascucci.tasklist.R;
 import com.example.willpascucci.tasklist.model.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +23,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     public List<Task> taskList;
     private ViewHolder mHolder;
+    private Context mContext;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView text;
@@ -32,12 +34,15 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     }
 
-    public MainListAdapter(List<Task> l) {
-        taskList = l;
+    public MainListAdapter(Context context) {
+        taskList = new ArrayList<>();
+        mContext = context;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.main_list_item, null);
+
         mHolder = new ViewHolder(v);
         return mHolder;
     }

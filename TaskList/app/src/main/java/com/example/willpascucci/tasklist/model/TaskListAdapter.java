@@ -1,4 +1,4 @@
-package com.example.willpascucci.tasklist.ui;
+package com.example.willpascucci.tasklist.model;
 
 
 import android.content.Context;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.willpascucci.tasklist.R;
-import com.example.willpascucci.tasklist.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.List;
 /**
  * Created by Nathan Walker on 2/4/15.
  */
-public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHolder> {
+public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
 
     public List<Task> taskList;
     private ViewHolder mHolder;
@@ -34,7 +33,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     }
 
-    public MainListAdapter(Context context) {
+    public TaskListAdapter(Context context) {
         taskList = new ArrayList<>();
         mContext = context;
     }

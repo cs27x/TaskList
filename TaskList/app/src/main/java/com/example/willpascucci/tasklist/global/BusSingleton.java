@@ -1,4 +1,4 @@
-package com.example.willpascucci.tasklist.ui;
+package com.example.willpascucci.tasklist.global;
 
 import com.squareup.otto.Bus;
 

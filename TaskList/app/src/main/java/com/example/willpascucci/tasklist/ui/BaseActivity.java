@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Nathan Walker on 2/4/15.
  */
-public class ActivityBase extends ActionBarActivity {
+public class BaseActivity extends ActionBarActivity {
     private final String TAG = getClass().getSimpleName();
     private Toolbar mActionBarToolbar;
 

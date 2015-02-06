@@ -1,27 +1,26 @@
 package com.example.willpascucci.tasklist.ui;
 
 import android.app.Fragment;
-import android.content.PeriodicSync;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.willpascucci.tasklist.R;
+import com.example.willpascucci.tasklist.model.TaskListAdapter;
 import com.example.willpascucci.tasklist.model.Task;
+import com.example.willpascucci.tasklist.global.BusSingleton;
 import com.squareup.otto.Subscribe;
 
 /**
  * Created by Nathan Walker on 2/4/15.
  */
-public class MainFragment extends Fragment {
+public class TaskListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
-    private MainListAdapter mAdapter;
+    private TaskListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -44,7 +43,7 @@ public class MainFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new MainListAdapter(getActivity());
+        mAdapter = new TaskListAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.taskList = Task.getAll();
         mAdapter.notifyDataSetChanged();
@@ -74,7 +73,7 @@ public class MainFragment extends Fragment {
     }
 
     @Subscribe
-    public void addTask(MainActivity.AddTaskEvent event) {
+    public void addTask(TaskListActivity.AddTaskEvent event) {
         Task task = new Task("New Task " + mAdapter.getItemCount());
         task.save();
         mAdapter.taskList.add(task);

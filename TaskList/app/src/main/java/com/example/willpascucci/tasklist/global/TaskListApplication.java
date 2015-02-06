@@ -1,4 +1,4 @@
-package com.example.willpascucci.tasklist;
+package com.example.willpascucci.tasklist.global;
 
 import com.activeandroid.app.Application;
 import com.example.willpascucci.tasklist.model.Task;

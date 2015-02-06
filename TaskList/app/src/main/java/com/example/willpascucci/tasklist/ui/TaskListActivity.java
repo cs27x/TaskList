@@ -1,14 +1,14 @@
 package com.example.willpascucci.tasklist.ui;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.willpascucci.tasklist.R;
+import com.example.willpascucci.tasklist.global.BusSingleton;
 
 
-public class MainActivity extends ActivityBase {
-    private static final String TAG = MainActivity.class.getSimpleName();
+public class TaskListActivity extends BaseActivity {
+    private static final String TAG = TaskListActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class MainActivity extends ActivityBase {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainFragment(), "main").commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new TaskListFragment(), "main").commit();
         }
     }
 

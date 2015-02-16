@@ -1,10 +1,10 @@
-package com.example.willpascucci.tasklist.ui;
+package com.github.willpascucci.tasklist.ui;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.example.willpascucci.tasklist.R;
-import com.example.willpascucci.tasklist.global.BusSingleton;
+import com.github.willpascucci.tasklist.R;
+import com.github.willpascucci.tasklist.global.BusSingleton;
 
 
 public class TaskListActivity extends BaseActivity {

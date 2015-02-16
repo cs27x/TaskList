@@ -1,4 +1,4 @@
-package com.example.willpascucci.tasklist.global;
+package com.github.willpascucci.tasklist.global;
 
 import com.squareup.otto.Bus;
 

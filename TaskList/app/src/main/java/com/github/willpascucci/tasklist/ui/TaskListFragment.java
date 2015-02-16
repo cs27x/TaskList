@@ -1,4 +1,4 @@
-package com.example.willpascucci.tasklist.ui;
+package com.github.willpascucci.tasklist.ui;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,10 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.willpascucci.tasklist.R;
-import com.example.willpascucci.tasklist.model.TaskListAdapter;
-import com.example.willpascucci.tasklist.model.Task;
-import com.example.willpascucci.tasklist.global.BusSingleton;
+import com.github.willpascucci.tasklist.R;
+import com.github.willpascucci.tasklist.model.TaskListAdapter;
+import com.github.willpascucci.tasklist.model.Task;
+import com.github.willpascucci.tasklist.global.BusSingleton;
 import com.squareup.otto.Subscribe;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.willpascucci.tasklist;
+package com.github.willpascucci.tasklist;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

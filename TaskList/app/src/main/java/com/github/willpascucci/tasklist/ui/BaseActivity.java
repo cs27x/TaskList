@@ -1,17 +1,13 @@
-package com.example.willpascucci.tasklist.ui;
+package com.github.willpascucci.tasklist.ui;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-import com.example.willpascucci.tasklist.R;
+import com.github.willpascucci.tasklist.R;
 
 import java.util.ArrayList;
 

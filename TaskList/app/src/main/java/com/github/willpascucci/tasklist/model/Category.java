@@ -1,11 +1,10 @@
-package com.TaskList.data;
+package com.github.willpascucci.tasklist.model;
 
 /**
  * Created by willpascucci on 2/1/15.
  */
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Category {
 

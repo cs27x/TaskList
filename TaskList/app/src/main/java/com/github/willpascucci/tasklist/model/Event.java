@@ -1,11 +1,8 @@
-package com.TaskList.data;
+package com.github.willpascucci.tasklist.model;
 
 /**
  * Created by willpascucci on 2/1/15.
  */
-
-import java.util.Date;
-import java.text.SimpleDateFormat;
 
 public class Event extends Task {
 

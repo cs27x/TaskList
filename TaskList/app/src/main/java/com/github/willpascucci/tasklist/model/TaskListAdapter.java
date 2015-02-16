@@ -1,18 +1,16 @@
-package com.example.willpascucci.tasklist.model;
+package com.github.willpascucci.tasklist.model;
 
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.willpascucci.tasklist.R;
+import com.github.willpascucci.tasklist.R;
 
 import java.util.ArrayList;
 import java.util.List;

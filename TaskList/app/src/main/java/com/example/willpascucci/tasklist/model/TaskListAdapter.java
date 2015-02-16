@@ -61,6 +61,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 task.text = s.toString();
+                task.save();
             }
 
             @Override

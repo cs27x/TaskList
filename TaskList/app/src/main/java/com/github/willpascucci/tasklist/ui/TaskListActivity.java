@@ -1,17 +1,26 @@
-package com.example.willpascucci.tasklist;
+package com.github.willpascucci.tasklist.ui;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.github.willpascucci.tasklist.R;
+import com.github.willpascucci.tasklist.global.BusSingleton;
 
 
-public class MainActivity extends ActionBarActivity {
+public class TaskListActivity extends BaseActivity {
+    private static final String TAG = TaskListActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (isFinishing()) return;
+
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new TaskListFragment(), "main").commit();
+        }
     }
 
 
@@ -30,10 +39,19 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case (R.id.action_settings):
+                return true;
+            case (R.id.action_add):
+                BusSingleton.get().post(new AddTaskEvent());
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
+
     }
+
+    public static class AddTaskEvent {}
 }
+
+

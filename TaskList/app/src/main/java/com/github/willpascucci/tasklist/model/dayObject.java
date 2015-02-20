@@ -1,3 +1,5 @@
+package com.github.willpascucci.tasklist.model;
+
 // created by Sahil, 2/19
 
 import java.util.Calendar;

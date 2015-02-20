@@ -189,6 +189,7 @@ public class Task extends Model {
     }
     
     //edits
+    Scanner scan= new Scanner(System.in);
     public void enterNameImportance(){
 		System.out.println("Enter title, importance(1-10) of the task");
 		this.name= scan.nextLine();

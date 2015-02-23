@@ -18,23 +18,25 @@ import java.util.Scanner;    //edit
  */
 @Table(name = "Tasks")
 public class Task extends Model {
-    @Column(name="Time")        public Date time;
+    // User variables
     @Column(name="Text")        public String text;
     @Column(name="Importance")  public int importance;
     @Column(name="Description") public String description;
     @Column(name="Deadline")    public Calendar deadline= Calendar.getInstance();   //edit
     @Column(name="Location")    public String location;
     @Column(name="Category")    public String category;
+    @Column(name="Required")    public float timeRequired;          //edit
+    @Column(name="Intensity")   public int intensity;               //edit
+
+    // Program variables
+    @Column(name="Time")        public Date time;
     @Column(name="% Completed") public double completed;
     @Column(name="Started")     public boolean started;
     @Column(name="Finished")    public boolean finished;
     @Column(name="Working?")    public boolean working;
     @Column(name="Paused Time") public Date pauseTime;
-                                public long elapsedTime;
-                                public Date startTime;
-                                public float timeRequired;          //edit
-                                public int percentCompleted= 0;     //edit
-                                public int intensity;               //edit
+    @Column(name="ElapsedTime") public long elapsedTime;
+    @Column(name="StartTime")   public Date startTime;
 
     public Task() {
         super();

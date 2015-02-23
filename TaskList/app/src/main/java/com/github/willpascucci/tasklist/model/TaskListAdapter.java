@@ -26,12 +26,15 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView text;
         public ImageButton removeButton;
+        public ImageButton pauseButton;
+        public ImageButton startButton;
         public ViewHolder(View v) {
             super(v);
             text = (TextView) v.findViewById(R.id.textView);
             removeButton = (ImageButton) v.findViewById(R.id.button_close);
+            pauseButton = (ImageButton) v.findViewById(R.id.button_pause);
+            startButton = (ImageButton) v.findViewById(R.id.button_play);
         }
-
     }
 
     public TaskListAdapter() {
@@ -75,6 +78,22 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
                 taskList.remove(index);
                 notifyItemRemoved(index);
                 task.delete();
+            }
+        });
+
+        holder.pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int index = taskList.indexOf(task);
+                taskList.get(index).pauseTask();
+            }
+        });
+
+        holder.startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int index = taskList.indexOf(task);
+                taskList.get(index).startTask();
             }
         });
     }

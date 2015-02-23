@@ -2,18 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-     <ImageButton
+              android:layout_height="wrap_content">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List Item"
+        android:gravity="left"
+        android:id="@+id/textView" android:layout_gravity="center_horizontal"/>
+
+    <ImageButton
+        android:id="@+id/button_play"
+        android:src="@drawable/ic_av_play_arrow"
+        android:background="#0000"
+        android:layout_margin="5dp"
+        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right|center_vertical" />
+
+    <ImageButton
+        android:id="@+id/button_pause"
+        android:src="@drawable/ic_av_pause"
+        android:background="#0000"
+        android:layout_margin="5dp"
+        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right|center_vertical" />
+
+    <ImageButton
+        android:id="@+id/button_finish"
+        android:src="@drawable/ic_action_done"
+        android:background="#0000"
+        android:layout_margin="5dp"
+        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right|center_vertical" />
+
+    <ImageButton
         android:id="@+id/button_close"
         android:src="@drawable/ic_action"
         android:background="#0000"
         android:layout_margin="5dp" android:layout_height="25dp"
         android:layout_width="wrap_content"
-        android:layout_gravity="end|center_vertical" />
-
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="List Item"
-            android:id="@+id/textView" android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="right|center_vertical" />
 </LinearLayout>

@@ -84,9 +84,7 @@ public class Task extends Model {
             setPauseTime(new Date());
             setElapsedTime(getElapsedTime()+
                     (getPauseTime().getTime()-getStartTime().getTime()) );
-            
         }
-
     }
 
     public Date getStartTime() {return startTime;}

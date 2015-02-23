@@ -5,8 +5,13 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+//some edits mady by Sahil, 2/19
+//edits are marked by comments
+
 import java.util.Date;
 import java.util.List;
+import java.util.Calendar;    //edit
+import java.util.Scanner;    //edit
 
 /**
  * Created by Nathan Walker on 2/4/15.
@@ -17,7 +22,7 @@ public class Task extends Model {
     @Column(name="Text")        public String text;
     @Column(name="Importance")  public int importance;
     @Column(name="Description") public String description;
-    @Column(name="Deadline")    public String deadline;
+    @Column(name="Deadline")    public Calendar deadline= Calendar.getInstance();   //edit
     @Column(name="Location")    public String location;
     @Column(name="Category")    public String category;
     @Column(name="% Completed") public double completed;
@@ -27,6 +32,9 @@ public class Task extends Model {
     @Column(name="Paused Time") public Date pauseTime;
                                 public long elapsedTime;
                                 public Date startTime;
+                                public float timeRequired;          //edit
+                                public int percentCompleted= 0;     //edit
+                                public int intensity;               //edit
 
     public Task() {
         super();
@@ -177,4 +185,38 @@ public class Task extends Model {
                 .orderBy("Time desc")
                 .execute();
     }
+    
+    //edits
+    Scanner scan= new Scanner(System.in);
+    public void enterNameImportance(){
+		System.out.println("Enter title, importance(1-10) of the task");
+		this.name= scan.nextLine();
+		this.importance= scan.nextInt();
+			
+	}
+	
+	public void estimateTimeReq(){
+		System.out.println("How much time do you think this task will require? Enter hours and min"); 
+		int hour= scan.nextInt();
+		int min= scan.nextInt();
+		this.timeRequired= hour + min/60;
+			
+	}
+	
+	public void setDeadline(){
+		System.out.println("enter deadline as yyyy, mm(0-11), dd, hh(0-23), mm");
+		this.deadline.set(Calendar.YEAR, scan.nextInt());
+		this.deadline.set(Calendar.MONTH, scan.nextInt());
+		this.deadline.set(Calendar.DAY_OF_MONTH, scan.nextInt());
+		this.deadline.set(Calendar.HOUR_OF_DAY, scan.nextInt());
+		this.deadline.set(Calendar.MINUTE, scan.nextInt());
+	
+	}
+	
+	public void setIntensity(){
+		System.out.println("How intense is this task on a scale of 1 to 3 where 1 is light "
+				+ "and 3 is intense");
+		this.intensity= scan.nextInt();
+			
+	}
 }

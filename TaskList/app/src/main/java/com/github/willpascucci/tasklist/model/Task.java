@@ -22,7 +22,7 @@ public class Task extends Model {
     @Column(name="Text")        public String text;
     @Column(name="Importance")  public int importance;
     @Column(name="Description") public String description;
-    @Column(name="Deadline")    public Calendar deadline= Calendar.getInstance();   //edit
+    @Column(name="Deadline")    public Date deadline; //edit
     @Column(name="Location")    public String location;
     @Column(name="Category")    public String category;
     @Column(name="Required")    public float timeRequired;          //edit
@@ -58,7 +58,7 @@ public class Task extends Model {
         this.working = false;
     }
 
-    public Task(int importance, String text, String description, String deadline,
+    public Task(int importance, String text, String description, Date deadline,
                 String location, String category, double completed, boolean started) {
         this.importance = importance;
         this.text = text;
@@ -125,11 +125,11 @@ public class Task extends Model {
         this.importance = importance;
     }
 
-    public String getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
@@ -188,37 +188,19 @@ public class Task extends Model {
                 .execute();
     }
     
-    //edits
-    Scanner scan= new Scanner(System.in);
-    public void enterNameImportance(){
-		System.out.println("Enter title, importance(1-10) of the task");
-		this.name= scan.nextLine();
-		this.importance= scan.nextInt();
-			
+	public void setTimeReq(float e){
+		this.timeRequired = e;
 	}
-	
-	public void estimateTimeReq(){
-		System.out.println("How much time do you think this task will require? Enter hours and min"); 
-		int hour= scan.nextInt();
-		int min= scan.nextInt();
-		this.timeRequired= hour + min/60;
-			
-	}
-	
-	public void setDeadline(){
-		System.out.println("enter deadline as yyyy, mm(0-11), dd, hh(0-23), mm");
-		this.deadline.set(Calendar.YEAR, scan.nextInt());
-		this.deadline.set(Calendar.MONTH, scan.nextInt());
-		this.deadline.set(Calendar.DAY_OF_MONTH, scan.nextInt());
-		this.deadline.set(Calendar.HOUR_OF_DAY, scan.nextInt());
-		this.deadline.set(Calendar.MINUTE, scan.nextInt());
-	
-	}
-	
-	public void setIntensity(){
-		System.out.println("How intense is this task on a scale of 1 to 3 where 1 is light "
-				+ "and 3 is intense");
-		this.intensity= scan.nextInt();
-			
+
+    public float getTimeReq() {
+        return this.timeRequired;
+    }
+
+    public int getIntensity() {
+        return this.intensity;
+    }
+
+	public void setIntensity(int i) {
+        this.intensity = i;
 	}
 }

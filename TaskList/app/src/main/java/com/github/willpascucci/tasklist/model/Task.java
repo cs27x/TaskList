@@ -187,7 +187,14 @@ public class Task extends Model {
                 .orderBy("Time desc")
                 .execute();
     }
-    
+
+    public static Task get(int id) {
+        return new Select()
+                .from(Task.class)
+                .where("Id = " + id)
+                .executeSingle();
+    }
+
 	public void setTimeReq(float e){
 		this.timeRequired = e;
 	}

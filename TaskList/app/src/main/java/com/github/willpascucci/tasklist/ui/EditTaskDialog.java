@@ -21,6 +21,7 @@ public class EditTaskDialog extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_task, container);
 
+        EditText e = view.findViewById(R.id.)
 
 
         return view;

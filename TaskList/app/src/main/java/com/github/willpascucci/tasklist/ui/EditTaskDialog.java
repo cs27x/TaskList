@@ -1,5 +1,6 @@
 package com.github.willpascucci.tasklist.ui;
 
+import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.text.Editable;
@@ -7,6 +8,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 
@@ -15,6 +18,7 @@ import com.github.willpascucci.tasklist.R;
 import com.github.willpascucci.tasklist.model.Task;
 
 import java.lang.reflect.Field;
+import java.util.Date;
 
 /**
  * Created by Nathan Walker on 2/23/15.
@@ -50,7 +54,23 @@ public class EditTaskDialog extends DialogFragment {
         setEditTextTaskField(view, R.id.edit_task, task, "text");
         setEditTextTaskField(view, R.id.edit_desc, task, "description");
 
-        numberPicker = (NumberPicker) view.findViewById(R.id.numberPicker1);
+        Button dateButton = (Button) view.findViewById(R.id.button_date);
+
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Date currentDate = new Date();
+                DatePickerDialog dateDialog = new DatePickerDialog(getActivity(),new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        task.setDeadline(new Date(year,monthOfYear,dayOfMonth));
+                    }
+                },currentDate.getYear(),currentDate.getMonth(),currentDate.getDay());
+                
+            }
+        });
+
+        numberPicker = (NumberPicker) view.findViewById(R.id.numberPicker);
         numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {

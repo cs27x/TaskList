@@ -37,6 +37,7 @@ public class Task extends Model {
     @Column(name="Paused Time") public Date pauseTime;
     @Column(name="ElapsedTime") public long elapsedTime;
     @Column(name="StartTime")   public Date startTime;
+    @Column(name="Priority")    public float priority;
 
     public Task() {
         super();
@@ -193,6 +194,20 @@ public class Task extends Model {
                 .from(Task.class)
                 .where("Id = " + id)
                 .executeSingle();
+    }
+
+    public static Task getFirst() {
+        return new Select()
+                .from(Task.class)
+                .orderBy("Priority")
+                .executeSingle();
+    }
+
+    public static List<Task> getOrdered() {
+        return new Select()
+                .from(Task.class)
+                .orderBy("Priority")
+                .execute();
     }
 
 	public void setTimeReq(float e){

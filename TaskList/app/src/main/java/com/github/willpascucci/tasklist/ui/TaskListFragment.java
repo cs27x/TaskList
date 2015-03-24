@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.willpascucci.tasklist.R;
+import com.github.willpascucci.tasklist.model.TaskList;
 import com.github.willpascucci.tasklist.model.TaskListAdapter;
 import com.github.willpascucci.tasklist.model.Task;
 import com.github.willpascucci.tasklist.global.BusSingleton;
@@ -74,9 +75,7 @@ public class TaskListFragment extends Fragment {
 
     @Subscribe
     public void addTask(TaskListActivity.AddTaskEvent event) {
-        Task task = new Task(null);
-        task.save();
-        mAdapter.taskList.add(task);
+        mAdapter.taskList.add(TaskList.newTask());
         mAdapter.notifyItemInserted(mAdapter.getItemCount());
     }
 

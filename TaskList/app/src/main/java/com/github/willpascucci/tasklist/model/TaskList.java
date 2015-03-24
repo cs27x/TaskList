@@ -9,8 +9,8 @@ import java.util.List;
  * Created by Nathan Walker on 3/18/15.
  */
 public class TaskList {
-    public static Task newTask() {
-        Task task = new Task(null);
+    public static Task newTask(String s) {
+        Task task = new Task(s);
         task.save();
         return task;
     }
@@ -29,7 +29,6 @@ public class TaskList {
     }
 
     public static void defer(int task) {
-
     }
 
     public static void updateAllPriorities() {

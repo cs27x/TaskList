@@ -75,7 +75,7 @@ public class TaskListFragment extends Fragment {
 
     @Subscribe
     public void addTask(TaskListActivity.AddTaskEvent event) {
-        mAdapter.taskList.add(TaskList.newTask());
+        mAdapter.taskList.add(TaskList.newTask(null));
         mAdapter.notifyItemInserted(mAdapter.getItemCount());
     }
 

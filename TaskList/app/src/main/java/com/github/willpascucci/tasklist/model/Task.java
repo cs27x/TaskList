@@ -19,20 +19,20 @@ import java.util.Scanner;    //edit
 @Table(name = "Tasks")
 public class Task extends Model {
     // User variables
-    @Column(name="Text")        public String text;
-    @Column(name="Importance")  public int importance;
-    @Column(name="Description") public String description;
-    @Column(name="Deadline")    public Date deadline; //edit
-    @Column(name="Location")    public String location;
-    @Column(name="Category")    public String category;
-    @Column(name="Required")    public float timeRequired;          //edit
-    @Column(name="Intensity")   public int intensity;               //edit
+    @Column(name="Text")        public String text; // set by editText in edit dialog
+    @Column(name="Importance")  public int importance; // set by picker in edit dialog
+    @Column(name="Description") public String description; // editText
+    @Column(name="Deadline")    public Date deadline; // picker
+    @Column(name="Location")    public String location; // TODO unused
+    @Column(name="Category")    public String category; // TODO unused
+    @Column(name="Required")    public float timeRequired; // TODO Sahil
+    @Column(name="Intensity")   public int intensity; // TODO Sahil
 
     // Program variables
-    @Column(name="Time")        public Date time;
-    @Column(name="% Completed") public double completed;
-    @Column(name="Started")     public boolean started;
-    @Column(name="Finished")    public boolean finished;
+    @Column(name="Time")        public Date time; // set in ctor (time created)
+    @Column(name="% Completed") public double completed; // TODO unused
+    @Column(name="Started")     public boolean started;  // TODO redundant
+    @Column(name="Finished")    public boolean finished; //
     @Column(name="Working?")    public boolean working;
     @Column(name="Paused Time") public Date pauseTime;
     @Column(name="ElapsedTime") public long elapsedTime;

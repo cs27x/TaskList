@@ -20,6 +20,7 @@ import com.github.willpascucci.tasklist.model.Task;
 
 import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Created by Nathan Walker on 2/23/15.
@@ -60,13 +61,17 @@ public class EditTaskDialog extends DialogFragment {
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date currentDate = new Date();
+                //Date currentDate = new Date();
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog dateDialog = new DatePickerDialog(getActivity(),new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         task.setDeadline(new Date(year,monthOfYear,dayOfMonth));
                     }
-                },currentDate.getYear(),currentDate.getMonth(),currentDate.getDay());
+                },year,month,day);
                 dateDialog.show();
             }
 
@@ -74,12 +79,36 @@ public class EditTaskDialog extends DialogFragment {
         });
 
         numberPicker = (NumberPicker) view.findViewById(R.id.numberPicker);
+
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(10);
+        numberPicker.setValue(task.getImportance());
+
         numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                task.importance = newVal;
+                task.setImportance(newVal);
             }
         });
+
+        Button saveButton = (Button) view.findViewById(R.id.button_save);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                task.save();
+            }
+        });
+
+        Button cancelButton = (Button) view.findViewById(R.id.button_save);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return view;
     }
 

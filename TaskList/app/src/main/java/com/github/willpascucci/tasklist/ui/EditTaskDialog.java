@@ -66,8 +66,10 @@ public class EditTaskDialog extends DialogFragment {
                         task.setDeadline(new Date(year,monthOfYear,dayOfMonth));
                     }
                 },currentDate.getYear(),currentDate.getMonth(),currentDate.getDay());
-                
+                dateDialog.show();
             }
+
+
         });
 
         numberPicker = (NumberPicker) view.findViewById(R.id.numberPicker);

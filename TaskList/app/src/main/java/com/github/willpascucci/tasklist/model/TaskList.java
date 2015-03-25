@@ -4,13 +4,13 @@ import com.activeandroid.ActiveAndroid;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
 
 /**
  * Created by Nathan Walker on 3/18/15.
  */
 public class TaskList {
     public static Task newTask(String s) {
-        if (s == null) s = "New Task";
         Task task = new Task(s);
         task.save();
         return task;
@@ -46,12 +46,15 @@ public class TaskList {
         setPriority(t);                                             //edit by Sahil
         ActiveAndroid.endTransaction();                             //edit by Sahil
     }
-    
+
     // added by Sahil
-    
+
     public static void setPriority(Task t1){
+        final Calendar c = Calendar.getInstance();
+        t1.timeRequired = (float) t1.getDeadline().getTime()-c.getTime().getTime();
+        t1.elapsedTime = (long) c.getTime().getTime()-t1.getTime().getTime();
         float timeRemaining = t1.timeRequired - t1.elapsedTime;
-        if (timeRemaining < 0) timeRemaining = 0.0;
+        if (timeRemaining < 0) timeRemaining = 0.0f;
         t1.priority = t1.importance * 10;                             //get a score out of 100
         if ((timeRemaining/t1.timeRequired) < 0.5){                         //less than half time left
             if ((timeRemaining/t1.timeRequired) < 0.75) t1.priority += 40;   //less than quarter time left, increase priority

@@ -50,6 +50,7 @@ public class Task extends Model {
         super();
         this.text = text;
         this.time = new Date();
+        this.importance = 3;
         this.pauseTime = null;
         this.startTime = null;
     }

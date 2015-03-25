@@ -202,7 +202,7 @@ public class Task extends Model {
     public static List<Task> getOrdered() {
         return new Select()
                 .from(Task.class)
-                .orderBy("Priority desc")
+                .orderBy("Importance desc")
                 .execute();
     }
 

@@ -16,7 +16,9 @@ import android.widget.NumberPicker;
 
 import com.activeandroid.ActiveAndroid;
 import com.github.willpascucci.tasklist.R;
+import com.github.willpascucci.tasklist.global.BusSingleton;
 import com.github.willpascucci.tasklist.model.Task;
+import com.github.willpascucci.tasklist.model.TaskList;
 
 import java.lang.reflect.Field;
 import java.util.Date;
@@ -66,12 +68,12 @@ public class EditTaskDialog extends DialogFragment {
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dateDialog = new DatePickerDialog(getActivity(),new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog dateDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        task.setDeadline(new Date(year,monthOfYear,dayOfMonth));
+                        task.setDeadline(new Date(year, monthOfYear, dayOfMonth));
                     }
-                },year,month,day);
+                }, year, month, day);
                 dateDialog.show();
             }
 
@@ -97,15 +99,17 @@ public class EditTaskDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 task.save();
+                BusSingleton.get().post(new TaskListFragment.UpdateEvent());
+                dismiss();
             }
         });
 
-        Button cancelButton = (Button) view.findViewById(R.id.button_save);
+        Button cancelButton = (Button) view.findViewById(R.id.button_cancel);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                dismiss();
             }
         });
 

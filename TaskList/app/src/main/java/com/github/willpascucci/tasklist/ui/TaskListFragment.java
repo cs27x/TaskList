@@ -102,4 +102,13 @@ public class TaskListFragment extends Fragment {
         mAdapter.notifyItemInserted(mAdapter.getItemCount());
     }
 
+    public static class UpdateEvent { }
+
+    @Subscribe
+    public void updateList(UpdateEvent update) {
+        mAdapter.taskList.clear();
+        mAdapter.taskList.addAll(Task.getOrdered());
+        mAdapter.notifyDataSetChanged();
+    }
+
 }

@@ -40,7 +40,7 @@ public class TaskList {
         ActiveAndroid.endTransaction();
     }
 
-    public static void updatePriority(int id) {
+    public static void updatePriority(long id) {
         ActiveAndroid.beginTransaction();
         Task t = Task.get(id);
         setPriority(t);                                             //edit by Sahil

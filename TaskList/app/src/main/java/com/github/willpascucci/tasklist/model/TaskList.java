@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class TaskList {
     public static Task newTask(String s) {
+        if (s == null) s = "New Task";
         Task task = new Task(s);
         task.save();
         return task;

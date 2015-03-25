@@ -1,4 +1,4 @@
-package com.github.willpascucci.tasklist.model;
+//package com.github.willpascucci.tasklist.model;
 
 //some edits made by Sahil on 2/19
 //edits are marked by comments
@@ -7,6 +7,7 @@ package com.github.willpascucci.tasklist.model;
  * Created by willpascucci on 2/1/15.
  */
 
+/* doesn't compile
 public class Event extends Task {
 
     private boolean skippable;
@@ -77,3 +78,4 @@ public class Event extends Task {
 		this.workRequired= this.intensity * this.interval;
 	}
 }
+*/

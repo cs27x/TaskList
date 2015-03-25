@@ -30,11 +30,11 @@ public class Task extends Model {
 
     // Program variables
     @Column(name="Time")        public Date time; // set in ctor (time created)
-    @Column(name="% Completed") public double completed; // TODO unused
+    @Column(name="PctCompleted") public double completed; // TODO unused
     @Column(name="Started")     public boolean started;  // TODO redundant
     @Column(name="Finished")    public boolean finished; //
-    @Column(name="Working?")    public boolean working;
-    @Column(name="Paused Time") public Date pauseTime;
+    @Column(name="Working")    public boolean working;
+    @Column(name="PausedTime") public Date pauseTime;
     @Column(name="ElapsedTime") public long elapsedTime;
     @Column(name="StartTime")   public Date startTime;
     @Column(name="Priority")    public float priority;
@@ -49,14 +49,9 @@ public class Task extends Model {
     public Task(String text) {
         super();
         this.text = text;
-        this.importance = 0;
-        this.deadline = null;
-        this.location = null;
-        this.category = null;
-        this.completed = 0;
-        this.started = false;
-        this.finished = false;
-        this.working = false;
+        this.time = new Date();
+        this.pauseTime = null;
+        this.startTime = null;
     }
 
     public Task(int importance, String text, String description, Date deadline,
@@ -189,7 +184,7 @@ public class Task extends Model {
                 .execute();
     }
 
-    public static Task get(int id) {
+    public static Task get(long id) {
         return new Select()
                 .from(Task.class)
                 .where("Id = " + id)
@@ -199,14 +194,14 @@ public class Task extends Model {
     public static Task getFirst() {
         return new Select()
                 .from(Task.class)
-                .orderBy("Priority")
+                .orderBy("Priority desc")
                 .executeSingle();
     }
 
     public static List<Task> getOrdered() {
         return new Select()
                 .from(Task.class)
-                .orderBy("Priority")
+                .orderBy("Priority desc")
                 .execute();
     }
 

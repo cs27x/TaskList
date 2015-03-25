@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ import java.util.Date;
  * Created by Nathan Walker on 2/23/15.
  */
 public class EditTaskDialog extends DialogFragment {
-    public final String KEY_ID = "KEY_ID";
+    public static final String KEY_ID = "KEY_ID";
 
     private EditText editTask;
     private Task task;
@@ -32,11 +33,11 @@ public class EditTaskDialog extends DialogFragment {
 
     private NumberPicker numberPicker;
 
-    public DialogFragment newInstance(int id) {
+    public static DialogFragment newInstance(long id) {
         EditTaskDialog dialog = new EditTaskDialog();
 
         Bundle args = new Bundle();
-        args.putInt(KEY_ID, id);
+        args.putLong(KEY_ID, id);
         dialog.setArguments(args);
 
         return dialog;
@@ -48,7 +49,7 @@ public class EditTaskDialog extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_task, container);
 
-        final int id = getArguments().getInt(KEY_ID);
+        final long id = getArguments().getLong(KEY_ID);
         task = Task.get(id);
 
         setEditTextTaskField(view, R.id.edit_task, task, "text");
@@ -87,8 +88,11 @@ public class EditTaskDialog extends DialogFragment {
         final Field field;
         try {
             field = Task.class.getField(fieldStr);
-            editText.setText((String)field.get(task));
+            String str = (String) field.get(task);
+            if (str != null)
+                editText.setText(str);
         } catch (Exception e) {
+            Log.d("TAG", e.toString());
             throw new AssertionError();
         }
         editText.addTextChangedListener(new TextWatcher() {

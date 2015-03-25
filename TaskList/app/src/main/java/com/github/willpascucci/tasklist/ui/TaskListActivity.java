@@ -1,10 +1,13 @@
 package com.github.willpascucci.tasklist.ui;
 
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.github.willpascucci.tasklist.R;
 import com.github.willpascucci.tasklist.global.BusSingleton;
+import com.github.willpascucci.tasklist.model.Task;
+import com.squareup.otto.Subscribe;
 
 
 public class TaskListActivity extends BaseActivity {
@@ -23,6 +26,17 @@ public class TaskListActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        BusSingleton.get().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        BusSingleton.get().unregister(this);
+        super.onStop();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,7 +57,7 @@ public class TaskListActivity extends BaseActivity {
             case (R.id.action_settings):
                 return true;
             case (R.id.action_add):
-                BusSingleton.get().post(new AddTaskEvent());
+                BusSingleton.get().post(new TaskListFragment.AddTaskEvent(""));
                 return true;
         }
 
@@ -51,7 +65,20 @@ public class TaskListActivity extends BaseActivity {
 
     }
 
-    public static class AddTaskEvent {}
+    public static class EditTaskEvent {
+        public Task task;
+
+        public EditTaskEvent(Task task) {
+            this.task = task;
+        }
+    }
+
+
+    @Subscribe
+    public void launchEditDialog(EditTaskEvent e) {
+        DialogFragment etd = EditTaskDialog.newInstance(e.task.getId());
+        etd.show(getFragmentManager(), "TAG_EDIT_TASK");
+    }
 }
 
 

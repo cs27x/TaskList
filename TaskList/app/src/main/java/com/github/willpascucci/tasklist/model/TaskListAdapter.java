@@ -1,6 +1,7 @@
 package com.github.willpascucci.tasklist.model;
 
 
+import android.app.DialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +12,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.github.willpascucci.tasklist.R;
+import com.github.willpascucci.tasklist.global.BusSingleton;
+import com.github.willpascucci.tasklist.ui.EditTaskDialog;
+import com.github.willpascucci.tasklist.ui.TaskListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +86,9 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         holder.text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO open dialog
+                BusSingleton.get().post(new TaskListActivity.EditTaskEvent(task));
+                DialogFragment e = EditTaskDialog.newInstance(task.getId());
+
             }
         });
 

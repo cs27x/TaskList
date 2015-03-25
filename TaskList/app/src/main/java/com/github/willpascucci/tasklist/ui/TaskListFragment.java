@@ -4,9 +4,12 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.github.willpascucci.tasklist.R;
 import com.github.willpascucci.tasklist.model.TaskList;
@@ -35,6 +38,20 @@ public class TaskListFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.main_recycler_view);
 
+        final EditText et = (EditText) rootView.findViewById(R.id.add_task);
+        et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN &&
+                    event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    BusSingleton.get().post(new AddTaskEvent(et.getText().toString()));
+                    et.getText().clear();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
@@ -46,7 +63,7 @@ public class TaskListFragment extends Fragment {
         // specify an adapter (see also next example)
         mAdapter = new TaskListAdapter();
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.taskList = Task.getAll();
+        mAdapter.taskList = Task.getOrdered();
         mAdapter.notifyDataSetChanged();
         return rootView;
     }
@@ -72,10 +89,16 @@ public class TaskListFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+    public static class AddTaskEvent {
+        public String text;
 
+        public AddTaskEvent(String text) {
+            this.text = text;
+        }
+    }
     @Subscribe
-    public void addTask(TaskListActivity.AddTaskEvent event) {
-        mAdapter.taskList.add(TaskList.newTask(null));
+    public void addTask(AddTaskEvent event) {
+        mAdapter.taskList.add(TaskList.newTask(event.text));
         mAdapter.notifyItemInserted(mAdapter.getItemCount());
     }
 

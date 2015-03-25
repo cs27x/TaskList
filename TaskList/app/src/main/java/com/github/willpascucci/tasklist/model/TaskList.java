@@ -34,10 +34,7 @@ public class TaskList {
     public static void updateAllPriorities() {
         ActiveAndroid.beginTransaction();
         for (Task t : Task.getAll()) {
-            float timeRemaining = t.timeRequired - t.elapsedTime;
-            if (timeRemaining < 0) timeRemaining = 0;
-            t.priority = t.importance - timeRemaining / 86400;
-            t.save();
+            setPriority(t);                                         //edit by Sahil
         }
         ActiveAndroid.endTransaction();
     }
@@ -45,10 +42,21 @@ public class TaskList {
     public static void updatePriority(int id) {
         ActiveAndroid.beginTransaction();
         Task t = Task.get(id);
-        float timeRemaining = t.timeRequired - t.elapsedTime;
-            if (timeRemaining < 0) timeRemaining = 0;
-            t.priority = t.importance - timeRemaining / 86400;
-            t.save();
+        setPriority(t);                                             //edit by Sahil
+        ActiveAndroid.endTransaction();                             //edit by Sahil
+    }
+    
+    // added by Sahil
+    
+    public static void setPriority(Task t1){
+        float timeRemaining = t1.timeRequired - t1.elapsedTime;
+        if (timeRemaining < 0) timeRemaining = 0.0;
+        t1.priority = t1.importance * 10;                             //get a score out of 100
+        if ((timeRemaining/t1.timeRequired) < 0.5){                         //less than half time left
+            if ((timeRemaining/t1.timeRequired) < 0.75) t1.priority += 40;   //less than quarter time left, increase priority
+            else t1.priority += 20;                                          //increase priority by a bit less for half time
+        }
+        t1.save();
     }
 
 }

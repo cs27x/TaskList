@@ -5,28 +5,39 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+//some edits mady by Sahil, 2/19
+//edits are marked by comments
+
 import java.util.Date;
 import java.util.List;
+import java.util.Calendar;    //edit
+import java.util.Scanner;    //edit
 
 /**
  * Created by Nathan Walker on 2/4/15.
  */
 @Table(name = "Tasks")
 public class Task extends Model {
-    @Column(name="Time")        public Date time;
-    @Column(name="Text")        public String text;
-    @Column(name="Importance")  public int importance;
-    @Column(name="Description") public String description;
-    @Column(name="Deadline")    public String deadline;
-    @Column(name="Location")    public String location;
-    @Column(name="Category")    public String category;
-    @Column(name="% Completed") public double completed;
-    @Column(name="Started")     public boolean started;
-    @Column(name="Finished")    public boolean finished;
-    @Column(name="Working?")    public boolean working;
-    @Column(name="Paused Time") public Date pauseTime;
-                                public long elapsedTime;
-                                public Date startTime;
+    // User variables
+    @Column(name="Text")        public String text; // set by editText in edit dialog
+    @Column(name="Importance")  public int importance; // set by picker in edit dialog
+    @Column(name="Description") public String description; // editText
+    @Column(name="Deadline")    public Date deadline; // picker
+    @Column(name="Location")    public String location; // TODO unused
+    @Column(name="Category")    public String category; // TODO unused
+    @Column(name="Required")    public float timeRequired; // TODO Sahil
+    @Column(name="Intensity")   public int intensity; // TODO Sahil
+
+    // Program variables
+    @Column(name="Time")        public Date time; // set in ctor (time created)
+    @Column(name="PctCompleted") public double completed; // TODO unused
+    @Column(name="Started")     public boolean started;  // TODO redundant
+    @Column(name="Finished")    public boolean finished; //
+    @Column(name="Working")    public boolean working;
+    @Column(name="PausedTime") public Date pauseTime;
+    @Column(name="ElapsedTime") public long elapsedTime;
+    @Column(name="StartTime")   public Date startTime;
+    @Column(name="Priority")    public float priority;
 
     public Task() {
         super();
@@ -38,17 +49,13 @@ public class Task extends Model {
     public Task(String text) {
         super();
         this.text = text;
-        this.importance = 0;
-        this.deadline = null;
-        this.location = null;
-        this.category = null;
-        this.completed = 0;
-        this.started = false;
-        this.finished = false;
-        this.working = false;
+        this.time = new Date();
+        this.importance = 3;
+        this.pauseTime = null;
+        this.startTime = null;
     }
 
-    public Task(int importance, String text, String description, String deadline,
+    public Task(int importance, String text, String description, Date deadline,
                 String location, String category, double completed, boolean started) {
         this.importance = importance;
         this.text = text;
@@ -115,11 +122,11 @@ public class Task extends Model {
         this.importance = importance;
     }
 
-    public String getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
@@ -177,4 +184,41 @@ public class Task extends Model {
                 .orderBy("Time desc")
                 .execute();
     }
+
+    public static Task get(long id) {
+        return new Select()
+                .from(Task.class)
+                .where("Id = " + id)
+                .executeSingle();
+    }
+
+    public static Task getFirst() {
+        return new Select()
+                .from(Task.class)
+                .orderBy("Priority desc")
+                .executeSingle();
+    }
+
+    public static List<Task> getOrdered() {
+        return new Select()
+                .from(Task.class)
+                .orderBy("Importance desc")
+                .execute();
+    }
+
+	public void setTimeReq(float e){
+		this.timeRequired = e;
+	}
+
+    public float getTimeReq() {
+        return this.timeRequired;
+    }
+
+    public int getIntensity() {
+        return this.intensity;
+    }
+
+	public void setIntensity(int i) {
+        this.intensity = i;
+	}
 }

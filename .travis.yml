@@ -6,7 +6,3 @@ android:
         - build-tools-21.1.2
         - android-21
 
-branches:
-    only:
-        - dev
-        - master

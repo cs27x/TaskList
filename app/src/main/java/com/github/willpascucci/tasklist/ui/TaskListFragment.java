@@ -1,13 +1,16 @@
 package com.github.willpascucci.tasklist.ui;
 
+import android.accounts.Account;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,10 +45,9 @@ public class TaskListFragment extends Fragment {
         et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN &&
-                    event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                if ((event != null && event.getAction() == EditorInfo.IME_ACTION_DONE) || event==null) {
                     BusSingleton.get().post(new AddTaskEvent(et.getText().toString()));
-                    et.getText().clear();
+                    v.setText("");
                     return true;
                 }
                 return false;

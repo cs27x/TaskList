@@ -9,6 +9,8 @@
         android:layout_height="wrap_content"
         android:hint="Add Task"
         android:gravity="left"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
         android:id="@+id/add_task" android:layout_gravity="start"/>
 
     <android.support.v7.widget.RecyclerView  android:layout_width="match_parent"

@@ -56,9 +56,6 @@ public class TaskListActivity extends BaseActivity {
         switch (id) {
             case (R.id.action_settings):
                 return true;
-            case (R.id.action_add):
-                BusSingleton.get().post(new TaskListFragment.AddTaskEvent(""));
-                return true;
         }
 
         return super.onOptionsItemSelected(item);

@@ -1,5 +1,5 @@
 # TaskList
-
+[![Build Status](https://travis-ci.org/cs27x/TaskList.svg?branch=master)](https://travis-ci.org/cs27x/TaskList)
 ###Mission Statement:
 Task List provides a comprehensive task reminder system by combining concepts from traditional to-do lists and reminder systems with an algorithmical and location-based smart planning system, taking the errand out of maintaining a to-do list.
 

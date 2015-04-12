@@ -1,22 +1,20 @@
 package com.github.willpascucci.tasklist.ui;
 
-import android.accounts.Account;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.github.willpascucci.tasklist.R;
 import com.github.willpascucci.tasklist.model.TaskList;
-import com.github.willpascucci.tasklist.model.TaskListAdapter;
 import com.github.willpascucci.tasklist.model.Task;
 import com.github.willpascucci.tasklist.global.BusSingleton;
 import com.squareup.otto.Subscribe;
@@ -29,6 +27,7 @@ public class TaskListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private TaskListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private EditText et;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,13 +40,12 @@ public class TaskListFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.main_recycler_view);
 
-        final EditText et = (EditText) rootView.findViewById(R.id.add_task);
+        et = (EditText) rootView.findViewById(R.id.add_task);
         et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && event.getAction() == EditorInfo.IME_ACTION_DONE) || event==null) {
                     BusSingleton.get().post(new AddTaskEvent(et.getText().toString()));
-                    v.setText("");
                     return true;
                 }
                 return false;
@@ -100,6 +98,7 @@ public class TaskListFragment extends Fragment {
     }
     @Subscribe
     public void addTask(AddTaskEvent event) {
+        et.setText("");
         mAdapter.taskList.add(TaskList.newTask(event.text));
         mAdapter.notifyItemInserted(mAdapter.getItemCount());
     }
@@ -111,6 +110,21 @@ public class TaskListFragment extends Fragment {
         mAdapter.taskList.clear();
         mAdapter.taskList.addAll(Task.getOrdered());
         mAdapter.notifyDataSetChanged();
+    }
+
+    public static class StartStopEvent {
+        public Task task;
+
+        public StartStopEvent(Task task) {
+            this.task = task;
+        }
+    }
+
+    @Subscribe
+    public void StartStop(StartStopEvent e) {
+        if (e.task.isStarted())
+
+        e.task.startTask();
     }
 
 }
